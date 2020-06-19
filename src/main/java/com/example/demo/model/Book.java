@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -19,7 +20,6 @@ public class Book implements Serializable {
     int id;
     String title;
     String author;
-    //@OneToMany(mappedBy = "book")
-    //List<Review> listOfReviews;
+
 
 }

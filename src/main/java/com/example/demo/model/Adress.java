@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,9 +15,14 @@ import java.io.Serializable;
 public class Adress implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int id;
     private String city;
     private String street;
     private String state;
+
+    @OneToOne
+    @MapsId
+    @JsonIgnore
+    private User user;
 
 }

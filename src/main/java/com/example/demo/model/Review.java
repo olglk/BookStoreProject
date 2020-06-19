@@ -14,10 +14,16 @@ import java.io.Serializable;
 public class Review implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
     int bookId;
+    int id;
     String reviewerName;
     int rating;
-    //@ManyToOne()
-    //Book book;
+
+//    @ManyToOne
+//    private Book book;
+
+//    @ManyToOne
+//    @JoinColumn(name = "book_id")
+//    private Book book;
+
 }
