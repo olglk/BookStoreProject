@@ -5,8 +5,11 @@ import com.example.demo.model.User;
 import com.example.demo.repository.AdressRepository;
 import com.example.demo.repository.UserRepository;
 import org.hibernate.annotations.GeneratorType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -18,6 +21,24 @@ public class UserController {
 
         this.userRepository = userRepository;
         this.adressRepository = adressRepository;
+    }
+
+    @PostMapping(path = "/uri", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> addUser(@RequestBody User user) {
+
+        User userNew = userRepository.save(user);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(userNew.getId())
+                .toUri();
+
+        return ResponseEntity.created((location)).build();
+    }
+
+    @GetMapping("/byname/{name}")
+    public List<User> findUserByName(@PathVariable String name) {
+        return userRepository.findUserByName(name);
     }
 
     @PostMapping

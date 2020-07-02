@@ -1,13 +1,14 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -20,6 +21,11 @@ public class Book implements Serializable {
     int id;
     String title;
     String author;
+
+    @ManyToMany(mappedBy = "books")
+    @JsonIgnore
+    private Set<User> users = new HashSet<>();
+
 
 
 }
